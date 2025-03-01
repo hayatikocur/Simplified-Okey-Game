@@ -96,7 +96,18 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
+        Tile[] playerTiles = players[0].getTiles();
+        if (playerTiles[tileIndex] == null) {
+            System.out.println("You don't have any tile with that index!");
+        } else {
+            this.lastDiscardedTile = playerTiles[tileIndex];
+            for (int i = tileIndex; i < playerTiles.length - 1; i++) {
+                playerTiles[i] = playerTiles[i + 1];
+            }
+            players[0].setNumberOfTiles(players[0].getNumberOfTiles() + 1);
+            System.out.println("You just discarded " + this.lastDiscardedTile.toString() + " from your tiles.");
+        }
+        
     }
 
     public void displayDiscardInformation() {

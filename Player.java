@@ -22,7 +22,12 @@ public class Player {
      * make sure playerTiles are not more than 15 at any time
      */
     public void addTile(Tile t) {
-
+        if (this.numberOfTiles == 15) {
+            System.out.println("You can't add that tile. You already have 15 tiles.");
+        } else {
+            this.playerTiles[this.numberOfTiles] = t;
+            this.numberOfTiles++;
+        }
     }
 
     /*
@@ -63,5 +68,13 @@ public class Player {
 
     public String getName() {
         return playerName;
+    }
+
+    public int getNumberOfTiles() {
+        return this.numberOfTiles;
+    }
+
+    public void setNumberOfTiles(int numberOfTiles) {
+        this.numberOfTiles = numberOfTiles;
     }
 }
