@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Player {
     String playerName;
     Tile[] playerTiles;
@@ -9,9 +11,6 @@ public class Player {
         numberOfTiles = 0; // currently this player owns 0 tiles, will pick tiles at the beggining of the game
     }
 
-    /*
-     * TODO: removes and returns the tile in given index
-     */
     public Tile getAndRemoveTile(int index) {
         Tile givenTile = this.playerTiles[index];
         for(int i = index; i < playerTiles.length - 1; i++){
@@ -22,11 +21,6 @@ public class Player {
         return givenTile;
     }
 
-    /*
-     * TODO: adds the given tile to the playerTiles in order
-     * should also update numberOfTiles accordingly.
-     * make sure playerTiles are not more than 15 at any time
-     */
     public void addTile(Tile t) {
         if (this.numberOfTiles == 15) {
             System.out.println("You can't add that tile. You already have 15 tiles.");
@@ -36,12 +30,6 @@ public class Player {
         }
     }
 
-    /*
-     * TODO: checks if this player's hand satisfies the winning condition
-     * to win this player should have 3 chains of length 4, extra tiles
-     * does not disturb the winning condition
-     * @return
-     */
     public boolean isWinningHand() {
         int count = 0;
         int currentChain = 1;
@@ -100,4 +88,8 @@ public class Player {
     public void setNumberOfTiles(int numberOfTiles) {
         this.numberOfTiles = numberOfTiles;
     }
+
+    // public void sortTiles() {
+    //     this.playerTiles = Arrays.sort(playerTiles, (a, b) -> (a.getValue() - b.getValue()));
+    // }
 }
