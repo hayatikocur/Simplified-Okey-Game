@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class OkeyGame {
 
     Player[] players;
@@ -74,6 +76,17 @@ public class OkeyGame {
      */
     public void shuffleTiles() {
 
+        Random  random = new Random();
+        for(int i = tiles.length - 1; i > 0; i--)
+        {
+            int randomIndex = random.nextInt(i + 1);
+            Tile tempTile = tiles[randomIndex];
+
+            tiles[randomIndex] = tiles[i];
+            tiles[i] = tempTile;
+
+        }
+
     }
 
     /*
@@ -81,7 +94,7 @@ public class OkeyGame {
      * finished the game, use isWinningHand() method of Player to decide
      */
     public boolean didGameFinish() {
-        return false;
+        return players[currentPlayerIndex].isWinningHand();
     }
 
     /*
