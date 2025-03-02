@@ -48,7 +48,7 @@ public class Player {
 
         if (numberOfTiles < 12) return false;
 
-        for(int i = 0; i < playerTiles.length; i++){
+        for(int i = 0; i < playerTiles.length - 1; i++){
             if ( playerTiles[i] != null && playerTiles[i+1] != null && playerTiles[i].getValue() == playerTiles[i+1].getValue() && playerTiles[i].getColor() != playerTiles[i+1].getColor()) {
                 currentChain++;
             }
