@@ -25,7 +25,7 @@ public class Tile {
             return 1;
         }
         else{
-             if(getValue() < t.getValue()) {
+            if(getValue() < t.getValue()) {
                 return -1;
             }
             else if(getValue() > t.getValue()) {

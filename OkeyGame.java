@@ -116,15 +116,13 @@ public class OkeyGame {
 
         // check for same tile existence
         for (Tile t : currentPlayer.getTiles()) {
-            if (t != null) {
-                if (t.getValue() == lastDiscardedTileValue) {
-                    if (t.getColor() != lastDiscardedTileColor) {
-                        sameValDiffColCounter++;
-                    } else {
-                        sameTileExist = true;
-                    }
-                } 
-            }
+            if (t != null && t.getValue() == lastDiscardedTileValue) {
+                if (t.getColor() != lastDiscardedTileColor) {
+                    sameValDiffColCounter++;
+                } else {
+                    sameTileExist = true;
+                }
+            } 
         }
         
         // sameValDiffColCounter >= 2 means 3 or 4 length chain can be made with the last discarded tile
@@ -186,7 +184,6 @@ public class OkeyGame {
         } 
 
         discardTile(discardedTileIndex);
-        System.out.println(tiles[discardedTileIndex].toString() + " is discarded by " + players[currentPlayerIndex].getName() + ".");
     }
 
     /*
@@ -195,7 +192,7 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-        Tile[] playerTiles = players[0].getTiles();
+        Tile[] playerTiles = players[currentPlayerIndex].getTiles();
         if (playerTiles[tileIndex] == null) {
             System.out.println("You don't have any tile with that index!");
         } else {
@@ -203,8 +200,8 @@ public class OkeyGame {
             for (int i = tileIndex; i < playerTiles.length - 1; i++) {
                 playerTiles[i] = playerTiles[i + 1];
             }
-            players[0].setNumberOfTiles(players[0].getNumberOfTiles() + 1);
-            System.out.println("You just discarded " + this.lastDiscardedTile.toString() + " from your tiles.");
+            players[currentPlayerIndex].setNumberOfTiles(players[currentPlayerIndex].getNumberOfTiles() - 1);
+            System.out.println(players[currentPlayerIndex].getName() + " just discarded " + this.lastDiscardedTile.toString() + " from your tiles.");
         }
         
     }
