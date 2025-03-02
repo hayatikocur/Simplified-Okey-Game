@@ -7,6 +7,9 @@ public class OkeyGame {
 
     int currentPlayerIndex = 0;
 
+    //this is for keeping track of stack of tiles so we dont modify array every single time when a tile gets picked.
+    int tileIndex = 0;
+
     public OkeyGame() {
         players = new Player[4];
     }
@@ -33,7 +36,14 @@ public class OkeyGame {
      * this method assumes the tiles are already shuffled
      */
     public void distributeTilesToPlayers() {
-
+        for(int i=0; i<players.length; i++){
+            for(int j=0; j<14; j++){
+                players[i].getTiles()[j] = tiles[tileIndex++];
+            }
+            if(i==0){
+                players[0].getTiles()[14] = tiles[tileIndex++];
+            }
+        }
     }
 
     /*
@@ -42,7 +52,8 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        players[currentPlayerIndex].getTiles()[14] = lastDiscardedTile;
+        return lastDiscardedTile.toString();
     }
 
     /*
@@ -51,7 +62,11 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getTopTile() {
-        return null;
+        players[currentPlayerIndex].getTiles()[14] = tiles[tileIndex];
+        Tile tempTile = tiles[tileIndex];
+        tiles[tileIndex] = null;
+        tileIndex++;
+        return tempTile.toString();
     }
 
     /*
