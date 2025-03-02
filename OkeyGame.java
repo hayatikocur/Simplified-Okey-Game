@@ -105,7 +105,38 @@ public class OkeyGame {
      * the current status. Print whether computer picks from tiles or discarded ones.
      */
     public void pickTileForComputer() {
+        int lastDiscardedTileValue = lastDiscardedTile.getValue();
+        char lastDiscardedTileColor = lastDiscardedTile.getColor();
+        
+        Player currentPlayer = players[currentPlayerIndex];
 
+        boolean getLastDiscardedTile = false;
+        boolean sameTileExist = false;
+        int sameValDiffColCounter = 0;
+
+        // check for same tile existence
+        for (Tile t : currentPlayer.getTiles()) {
+            if (t.getValue() == lastDiscardedTileValue) {
+                if (t.getColor() != lastDiscardedTileColor) {
+                    sameValDiffColCounter++;
+                } else {
+                    sameTileExist = true;
+                }
+            } 
+        }
+        
+        // sameValDiffColCounter >= 2 means 3 or 4 length chain can be made with the last discarded tile
+        if (sameValDiffColCounter >= 2 && !sameTileExist) {
+            getLastDiscardedTile = true;
+        }
+
+        if (getLastDiscardedTile) {
+            getLastDiscardedTile();
+            System.out.print(currentPlayer.getName() + " picks the last discarded tile.");
+        } else {
+            getTopTile();
+            System.out.print(currentPlayer.getName() + " picks the top tile from the stack.");
+        }
     }
 
     /*
@@ -115,7 +146,45 @@ public class OkeyGame {
      * the single tiles and tiles that contribute to the smallest chains.
      */
     public void discardTileForComputer() {
+        Player currentPlayer = players[currentPlayerIndex];
+        Tile[] tiles = currentPlayer.getTiles();
 
+        int discardedTileIndex = 0;
+        int tempSameTileNum = 0, maxSameTileNum = 0;
+
+        // check for duplicates
+        for (int i = 0; i < tiles.length - 1; i++) {
+            if (tiles[i].toString().equals(tiles[i + 1].toString())) {
+                tempSameTileNum++;
+                if (tempSameTileNum > maxSameTileNum) {
+                    maxSameTileNum = tempSameTileNum;
+                    discardedTileIndex = i;
+                }
+            } else {
+                tempSameTileNum = 0;
+            }
+        }
+
+        // check for the single tiles and tiles that contribute to the smallest chains
+        if (maxSameTileNum == 0) {
+            // minSameValNum equals to 4 because there are 4 different colors so tempSameValNum can be at most 3
+            int tempSameValNum = 0, minSameValNum = 4;
+
+            for (int i = 0; i < tiles.length - 1; i++) {
+                if (tiles[i].getValue() == tiles[i + 1].getValue()) {
+                    tempSameValNum++;
+                } else {
+                    if (tempSameValNum < minSameValNum) {
+                        minSameValNum = tempSameValNum;
+                        tempSameValNum = 0;
+                        discardedTileIndex = i;
+                    }
+                }
+            }
+        } 
+
+        discardTile(discardedTileIndex);
+        System.out.println(tiles[discardedTileIndex].toString() + " is discarded by " + players[currentPlayerIndex].getName() + ".");
     }
 
     /*
