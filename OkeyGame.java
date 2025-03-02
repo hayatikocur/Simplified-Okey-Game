@@ -40,10 +40,10 @@ public class OkeyGame {
     public void distributeTilesToPlayers() {
         for(int i=0; i<players.length; i++){
             for(int j=0; j<14; j++){
-                players[i].getTiles()[j] = tiles[tileIndex++];
+                players[i].addTile(tiles[tileIndex++]);
             }
             if(i==0){
-                players[0].getTiles()[14] = tiles[tileIndex++];
+                players[0].addTile(tiles[tileIndex++]);
             }
         }
     }
