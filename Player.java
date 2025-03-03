@@ -54,9 +54,7 @@ public class Player {
         if (count == 3) {
             System.out.println();
             System.out.println("Winner's hand: ");
-            for (int i = 0; i < numberOfTiles; i++) {
-                System.out.print(playerTiles[i] + " ");
-            }
+            
             return true;
         } else {
             return false;

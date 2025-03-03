@@ -63,12 +63,18 @@ public class OkeyGame {
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
      * it should return the toString method of the tile so that we can print what we picked
      */
-    public String getTopTile() {
+    public Tile getTopTile() {
+        if(tileIndex >= tiles.length)
+        {
+            System.out.println("Tiles ended. The game ends.");
+            return null;
+        }
+        
         players[currentPlayerIndex].addTile(tiles[tileIndex]);
         Tile tempTile = tiles[tileIndex];
         tiles[tileIndex] = null;
         tileIndex++;
-        return tempTile.toString();
+        return tempTile;
     }
 
     public boolean isTie() {
@@ -112,10 +118,18 @@ public class OkeyGame {
      * the current status. Print whether computer picks from tiles or discarded ones.
      */
     public void pickTileForComputer() {
+
+        Player currentPlayer =players[currentPlayerIndex];
+        if(lastDiscardedTile == null)
+        {
+            Tile tileFromStack = getTopTile();
+            System.out.print(currentPlayer.getName() + " pick the top tile from stack");
+            currentPlayer.addTile(tileFromStack);
+            return;
+        }
         int lastDiscardedTileValue = lastDiscardedTile.getValue();
         char lastDiscardedTileColor = lastDiscardedTile.getColor();
         
-        Player currentPlayer = players[currentPlayerIndex];
 
         boolean getLastDiscardedTile = false;
         boolean sameTileExist = false;

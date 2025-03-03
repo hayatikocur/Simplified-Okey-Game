@@ -6,13 +6,30 @@ public class ApplicationMain {
         Scanner sc = new Scanner(System.in);
         OkeyGame game = new OkeyGame();
 
-        System.out.print("Please enter your name: ");
-        String playerName = sc.next();
+        System.out.println("Game mode selection: ");
+        System.out.println("1. Standart Human and 3 Computer Player Mode");
+        System.out.println("2. All 4 Computer Player Mode");
+        int gameModeSelect = sc.nextInt();
 
-        game.setPlayerName(0, playerName);
-        game.setPlayerName(1, "John");
-        game.setPlayerName(2, "Jane");
-        game.setPlayerName(3, "Ted");
+        boolean isOnlyComputer = gameModeSelect == 2;
+
+        if(!isOnlyComputer) 
+        {
+            System.out.print("Please enter your name: ");
+            String playerName = sc.next();
+            game.setPlayerName(0, playerName);
+            game.setPlayerName(1, "John");
+            game.setPlayerName(2, "Jane");
+            game.setPlayerName(3, "Ted");
+
+        }
+        else 
+        {
+            game.setPlayerName(0, "Player1");
+            game.setPlayerName(1, "Player2");
+            game.setPlayerName(2, "Player3");
+            game.setPlayerName(3, "Player4");
+        }
 
         game.createTiles();
         game.shuffleTiles();
@@ -32,7 +49,7 @@ public class ApplicationMain {
             int currentPlayer = game.getCurrentPlayerIndex();
             System.out.println(game.getCurrentPlayerName() + "'s turn.");
             
-            if(currentPlayer == 0) {
+            if(!isOnlyComputer && currentPlayer == 0) {
                 // this is the human player's turn
                 game.displayCurrentPlayersTiles();
                 game.displayDiscardInformation();
@@ -56,6 +73,7 @@ public class ApplicationMain {
                 if(!firstTurn) {
                     if (game.isTie()) {
                         System.out.println("Game ended in a tie.");
+                        sc.close();
                         return;
                     }
 
@@ -108,6 +126,14 @@ public class ApplicationMain {
                 if(devModeOn) {
                     game.displayCurrentPlayersTiles();
                 }
+                if(isOnlyComputer && firstTurn && currentPlayer == 0)
+                {
+                    System.out.println(game.getCurrentPlayerName() + "'s first turn of computer discard only");
+                    game.discardTileForComputer();
+                    firstTurn = false;
+                    game.passTurnToNextPlayer();
+                    continue;
+                }
 
                 // computer picks a tile from tile stack or other player's discard
                 game.pickTileForComputer();
@@ -118,6 +144,7 @@ public class ApplicationMain {
                     // if game did not end computer should discard
                     if (game.isTie()) {
                         System.out.println("Game ended in a tie.");
+                        sc.close();
                         return;
                     }
                     
@@ -126,9 +153,11 @@ public class ApplicationMain {
                 }
                 else{
                     // current computer character wins
+                    game.displayCurrentPlayersTiles();
                     System.out.println(game.getCurrentPlayerName() + " wins.");
                 }
             }
         }
+        sc.close();
     }
 }
