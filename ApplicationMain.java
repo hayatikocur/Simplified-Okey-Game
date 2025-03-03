@@ -54,6 +54,11 @@ public class ApplicationMain {
 
                 // after the first turn we can pick up
                 if(!firstTurn) {
+                    if (game.isTie()) {
+                        System.out.println("Game ended in a tie.");
+                        return;
+                    }
+
                     if(playerChoice == 1) {
                         System.out.println("You picked up: " + game.getTopTile());
                         firstTurn = false;
@@ -111,6 +116,11 @@ public class ApplicationMain {
 
                 if(gameContinues) {
                     // if game did not end computer should discard
+                    if (game.isTie()) {
+                        System.out.println("Game ended in a tie.");
+                        return;
+                    }
+                    
                     game.discardTileForComputer();
                     game.passTurnToNextPlayer();
                 }

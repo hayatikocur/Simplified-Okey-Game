@@ -71,6 +71,13 @@ public class OkeyGame {
         return tempTile.toString();
     }
 
+    public boolean isTie() {
+        if (tileIndex >= tiles.length) {
+            return true;
+        }
+        return false;
+    }
+
     /*
      * TODO: should randomly shuffle the tiles array before game starts
      */
