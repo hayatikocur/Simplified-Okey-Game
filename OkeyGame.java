@@ -153,7 +153,7 @@ public class OkeyGame {
         int tempSameTileNum = 0, maxSameTileNum = 0;
 
         // check for duplicates
-        for (int i = 0; i < tiles.length - 1 && tiles[i + 1] != null; i++) {
+        for (int i = 0; i < currentPlayer.numberOfTiles - 1; i++) {
             if (tiles[i].toString().equals(tiles[i + 1].toString())) {
                 tempSameTileNum++;
                 if (tempSameTileNum > maxSameTileNum) {
@@ -170,7 +170,7 @@ public class OkeyGame {
             // minSameValNum equals to 4 because there are 4 different colors so tempSameValNum can be at most 3
             int tempSameValNum = 0, minSameValNum = 4;
 
-            for (int i = 0; i < tiles.length - 1 && tiles[i + 1] != null; i++) {
+            for (int i = 0; i < currentPlayer.numberOfTiles - 1; i++) {
                 if (tiles[i].getValue() == tiles[i + 1].getValue()) {
                     tempSameValNum++;
                 } else {
