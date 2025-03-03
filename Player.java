@@ -36,11 +36,14 @@ public class Player {
 
         if (numberOfTiles < 12) return false;
 
-        for(int i = 0; i < playerTiles.length - 1; i++){
-            if ( playerTiles[i] != null && playerTiles[i+1] != null && playerTiles[i].getValue() == playerTiles[i+1].getValue() && playerTiles[i].getColor() != playerTiles[i+1].getColor()) {
+        for(int i = 0; i < numberOfTiles - 1; i++){
+            if (playerTiles[i].getValue() == playerTiles[i+1].getValue() && playerTiles[i].getColor() == playerTiles[i+1].getColor()) {
+                continue;
+            } else if ( playerTiles[i] != null && playerTiles[i+1] != null && playerTiles[i].getValue() == playerTiles[i+1].getValue() && playerTiles[i].getColor() != playerTiles[i+1].getColor()) {
                 currentChain++;
+            } else {
+                currentChain = 1;
             }
-            else currentChain = 1;
             
             if (currentChain == 4) {
                 count++;
@@ -48,7 +51,16 @@ public class Player {
             }    
         }
 
-        return count == 3;
+        if (count == 3) {
+            System.out.println();
+            System.out.println("Winner's hand: ");
+            for (int i = 0; i < numberOfTiles; i++) {
+                System.out.print(playerTiles[i] + " ");
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int findPositionOfTile(Tile t) {
@@ -89,7 +101,7 @@ public class Player {
         this.numberOfTiles = numberOfTiles;
     }
 
-    // public void sortTiles() {
-    //     this.playerTiles = Arrays.sort(playerTiles, (a, b) -> (a.getValue() - b.getValue()));
-    // }
+    public void sortTiles() {
+        Arrays.sort(this.playerTiles, 0, this.numberOfTiles);
+    }
 }

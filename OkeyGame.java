@@ -213,6 +213,7 @@ public class OkeyGame {
     }
 
     public void displayCurrentPlayersTiles() {
+        players[currentPlayerIndex].sortTiles();
         players[currentPlayerIndex].displayTiles();
     }
 
