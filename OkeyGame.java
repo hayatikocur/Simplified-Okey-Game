@@ -32,7 +32,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: distributes the starting tiles to the players
+     * (DONE)TODO: distributes the starting tiles to the players
      * player at index 0 gets 15 tiles and starts first
      * other players get 14 tiles
      * this method assumes the tiles are already shuffled
@@ -49,7 +49,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: get the last discarded tile for the current player
+     * (DONE)TODO: get the last discarded tile for the current player
      * (this simulates picking up the tile discarded by the previous player)
      * it should return the toString method of the tile so that we can print what we picked
      */
@@ -59,7 +59,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: get the top tile from tiles array for the current player
+     * (DONE)TODO: get the top tile from tiles array for the current player
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
      * it should return the toString method of the tile so that we can print what we picked
      */
@@ -69,7 +69,7 @@ public class OkeyGame {
             System.out.println("Tiles ended. The game ends.");
             return null;
         }
-        
+
         players[currentPlayerIndex].addTile(tiles[tileIndex]);
         Tile tempTile = tiles[tileIndex];
         tiles[tileIndex] = null;
@@ -85,7 +85,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: should randomly shuffle the tiles array before game starts
+     * (DONE)TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
 
@@ -103,7 +103,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: check if game still continues, should return true if current player
+     * (DONE)TODO: check if game still continues, should return true if current player
      * finished the game, use isWinningHand() method of Player to decide
      */
     public boolean didGameFinish() {
@@ -111,7 +111,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: Pick a tile for the current computer player using one of the following:
+     * (DONE)TODO: Pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
      * You should consider if the discarded tile is useful for the computer in
@@ -161,7 +161,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: Current computer player will discard the least useful tile.
+     * (DONE)TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
      * known by other players. You may first discard duplicates and then
      * the single tiles and tiles that contribute to the smallest chains.
@@ -208,7 +208,7 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: discards the current player's tile at given index
+     * (DONE)TODO: discards the current player's tile at given index
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles
      */

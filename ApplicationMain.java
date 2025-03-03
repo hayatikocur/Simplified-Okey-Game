@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Main class of Simple Okey Game
+ * @authors Hayati Kocur, Yiğit Kaan Önder, Burhan Bulut, Mustafa Mert Mumcu, Emir Akar 
+ */
 public class ApplicationMain {
 
     public static void main(String[] args) {
@@ -97,7 +101,7 @@ public class ApplicationMain {
 
                 if(gameContinues) {
                     // if game continues we need to discard a tile using the given index by the player
-                    // TODO: make sure the given index is correct, should be 0 <= index <= 14
+                    // (DONE)TODO: make sure the given index is correct, should be 0 <= index <= 14
 
                     boolean isCorrectChoiceDone = false;
 
